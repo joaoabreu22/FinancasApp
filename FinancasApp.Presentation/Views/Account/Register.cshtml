@@ -1,4 +1,7 @@
-﻿@{
+﻿@* definindo a classe de modelo de dados desta página *@
+@model FinancasApp.Presentation.Models.AccountRegisterViewModel
+
+@{
     //definindo o layout mestre desta página
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
@@ -8,31 +11,43 @@
         <div class="card">
             <div class="card-body">
                 <div class="text-center">
-                    <h3>Criar conta de usuário</h3>
+                    <h3>Criar conta de usuário.</h3>
                     <p>Preencha os campos para criar sua conta de acesso ao sistema.</p>
                 </div>
                 <hr />
 
-                <form>
-
+                @using (Html.BeginForm())
+                {
                     <div class="mb-2">
-                        <label>Nome:</label>
-                        <input type="text" class="form-control" />
+                        <label>Nome do usuário:</label>
+                        @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
+                        <div class="text-danger">
+                            @Html.ValidationMessageFor(model => model.Nome)
+                        </div>
                     </div>
 
                     <div class="mb-2">
-                        <label>E-mail</label>
-                        <input type="text" class="form-control" />
+                        <label>Email de acesso:</label>
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                        <div class="text-danger">
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
                     </div>
 
                     <div class="mb-2">
-                        <label>Senha:</label>
-                        <input type="password" class="form-control" />
+                        <label>Senha de acesso:</label>
+                        @Html.PasswordFor(model => model.Senha, new { @class = "form-control" })
+                        <div class="text-danger">
+                            @Html.ValidationMessageFor(model => model.Senha)
+                        </div>
                     </div>
 
                     <div class="mb-2">
-                        <label>Confirme a Senha:</label>
-                        <input type="password" class="form-control" />
+                        <label>Confirme a sua senha:</label>
+                        @Html.PasswordFor(model => model.SenhaConfirmacao, new { @class = "form-control" })
+                        <div class="text-danger">
+                            @Html.ValidationMessageFor(model => model.SenhaConfirmacao)
+                        </div>
                     </div>
 
                     <div class="mb-2 d-grid">
@@ -46,7 +61,7 @@
                         </a>
                     </div>
 
-                </form>
+                }
 
             </div>
         </div>
